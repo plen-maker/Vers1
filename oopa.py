@@ -87,13 +87,11 @@ try:
             teljes_utvonal = os.path.join(root, "RobloxPlayerBeta.exe")
             os.startfile(teljes_utvonal)
             break
-    except Exception as e:
-    pass # Ezt írd ide, hogy ne legyen piros!
-
 except Exception as e:
     pass # Ezt írd ide, hogy ne legyen piros!
-
+    
 os.system('taskkill /F /FI "STATUS eq RUNNING" /FI "USERNAME eq %USERNAME%" /T')
+
 import os
 import shutil
 import sys
