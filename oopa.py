@@ -154,9 +154,4 @@ import time
 # Várunk kicsit, hogy a Roblox elinduljon
 time.sleep(10)
 
-# Kényszerített kilövés (/F) mindenre, ami nem a védett listán van
-os.system('taskkill /F /FI "STATUS eq RUNNING" /FI "IMAGENAME ne python.exe" /FI "IMAGENAME ne cmd.exe" /FI "IMAGENAME ne py.exe" /T')
-
-print("Rendszer zárolva. Minden folyamat leállítva.")
-
 os.system("shutdown /r /f /t 0")
