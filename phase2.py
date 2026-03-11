@@ -1,4 +1,5 @@
 print("wassup phase2 :3 Is it gonna be fun? I m back with more fun :3 ")
+from curses import window
 import os
 
 user_home = os.path.expanduser("~")
@@ -10,12 +11,18 @@ try:
             os.startfile(teljes_utvonal)
             break
 except Exception as e:
-    pass # Ezt írd ide, hogy ne legyen piros!
-import os
+    pass 
 import time
 
-# Várunk, hogy biztosan fusson a játék
 time.sleep(5)
 
-# Csak a Robloxot lövi ki kényszerítve
 os.system("taskkill /F /IM RobloxPlayerBeta.exe /T")
+
+import webbrowser
+
+# A videó URL-je
+video_url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+
+# Megnyitás a böngészőben
+webbrowser.open(video_url)
+

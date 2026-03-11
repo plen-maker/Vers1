@@ -1,0 +1,17 @@
+from tkinter import *
+import tkinter
+
+window = Tk() #instantiate an instance of a window
+window.geometry("420x420")
+window.title("Phase2.exe")
+icon = PhotoImage(file='C:\\Users\\ddnem\\New folder\\logo1.png')
+window.iconphoto(True,icon)
+window.config(background="#FFFFFF")
+
+label = tkinter.Label(window, text="Hello World")
+label.place(x=100, y=100)
+
+button = tkinter.Button(window, text="Click me", command =lambda: print("Button clicked!"))
+button.place(x=100, y=150)
+
+window.mainloop()
