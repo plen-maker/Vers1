@@ -1,5 +1,4 @@
 print("wassup phase2 :3 Is it gonna be fun? I m back with more fun :3 ")
-
 import time
 
 ready = input("are you ready? (y/n) ")
@@ -46,14 +45,17 @@ if q1.lower() == "y":
 
 time
 
-elif q1.lower() == "n":
+if q1.lower() == "n":
     print("well too bad")
 
 so = input("So do you want to get the discordapp token? (y/n) ")
+
 if so.lower() == "y":
     print("well too bad")
+
 elif so.lower() == "n":
     print("well too bad")
+
 print("You are getting no where. Are you?")
 time.sleep(2)
 
@@ -95,8 +97,10 @@ time .sleep(2)
 steam1 = input("do you want to get the steam token? (y/n) ")
 if steam1.lower() == "y":
     print("well too bad")
+
 elif steam1.lower() == "n":
     print("well too bad")
+
 time .sleep(2)
 
 import os
@@ -133,22 +137,25 @@ def steam_bezarasa():
 math1 = input("Can you do a simple calculation? (y/n) ")
 if math1.lower() == "y":
     print("Then answer this.")
-    elif math1.lower() == "n":
+
+elif math1.lower() == "n":
     print("well too bad")
+
+
 time .sleep(1)
+
 math1a = input("What is 2 + 2? ")
 if math1a == "4":
-    import webbrowser
+    print("Correct!")
+else:
+    print("Wrong answer.")
+time .sleep(2)
 webbrowser.open("https://www.google.com")
 import os
 time.sleep(2)
 # Kilövi a Chrome összes folyamatát
 os.system("taskkill /F /IM chrome.exe /T >nul 2>&1")
 
-else:
-    import webbrowser
-
-# Megnyitja a Google-t (vagy amit szeretnél)
 webbrowser.open("https://www.google.com")
 import os
 time.sleep(2)
@@ -168,5 +175,8 @@ if math2.lower() == "1":
     print("Correct!")
 else:
     print("Wrong answer.")
-time .sleep(4)
-print("I have no clue ")
+time .sleep(2)
+print("I have no clue too!")
+time .sleep(2)
+
+
