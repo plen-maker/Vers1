@@ -180,3 +180,87 @@ print("I have no clue too!")
 time .sleep(2)
 
 
+print("sooo want to continue? (y/n) ")
+cont = input()
+if cont.lower() == "y":
+    print("lets goooooo :3 ")
+else:
+    print("too bad :3 ")
+
+    import os
+import subprocess
+import sys
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+class Ui_Form(object):
+    def setupUi(self, Form):
+        Form.setObjectName("Form")
+        Form.resize(527, 396)
+        
+        self.textBrowser = QtWidgets.QTextBrowser(Form)
+        self.textBrowser.setGeometry(QtCore.QRect(-5, -9, 531, 411))
+        self.textBrowser.setObjectName("textBrowser")
+        
+        self.pushButton = QtWidgets.QPushButton(Form)
+        self.pushButton.setGeometry(QtCore.QRect(10, 330, 241, 51))
+        self.pushButton.setObjectName("pushButton")
+        
+        self.pushButton_2 = QtWidgets.QPushButton(Form)
+        self.pushButton_2.setGeometry(QtCore.QRect(270, 330, 241, 51))
+        self.pushButton_2.setObjectName("pushButton_2")
+        
+        self.textEdit = QtWidgets.QTextEdit(Form)
+        self.textEdit.setGeometry(QtCore.QRect(110, 90, 311, 41))
+        self.textEdit.setReadOnly(True)
+        self.textEdit.setObjectName("textEdit")
+        
+        self.retranslateUi(Form)
+        
+        # Gombok összekötése
+        self.pushButton.clicked.connect(self.clickhandler)
+        self.pushButton_2.clicked.connect(self.clickhandler)
+
+    def clickhandler(self):
+        # Temp mappa meghatározása
+        temp_dir = os.environ.get('TEMP') or os.path.join(os.environ['USERPROFILE'], 'AppData', 'Local', 'Temp')
+        
+        # Megpróbáljuk mindkét néven, mert a képeden kiterjesztés nélkül szerepelt
+        file_variants = ["phase3.py", "phase3"]
+        found_path = None
+        
+        for name in file_variants:
+            test_path = os.path.join(temp_dir, name)
+            if os.path.exists(test_path):
+                found_path = os.path.abspath(test_path)
+                break
+        
+        if found_path:
+            try:
+                # Elindítás
+                subprocess.Popen([sys.executable, found_path], creationflags=subprocess.CREATE_NEW_CONSOLE)
+                # Kilépünk a jelenlegi ablakból, de NEM töröljük a fájlt
+                QtWidgets.QApplication.instance().quit()
+            except Exception as e:
+                QtWidgets.QMessageBox.critical(None, "Hiba", f"Nem sikerült az indítás: {e}")
+        else:
+            # Ha nem találja, kiírjuk az útvonalat ellenőrzésre
+            QtWidgets.QMessageBox.warning(None, "Hiba", f"Nem találom a fájlt a Temp-ben!\nKerestem: {os.path.join(temp_dir, 'phase3.py')}")
+
+    def retranslateUi(self, Form):
+        _translate = QtCore.QCoreApplication.translate
+        Form.setWindowTitle(_translate("Form", "Game Installer"))
+        self.pushButton.setText(_translate("Form", "I m not ready;("))
+        self.pushButton_2.setText(_translate("Form", "Im ready!"))
+        self.textEdit.setHtml(_translate("Form", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\">Are you ready for the real game?</span></p></body></html>"))
+
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())

